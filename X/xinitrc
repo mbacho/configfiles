@@ -1,0 +1,5 @@
+#### cinnamon
+# exec cinnamon-session
+
+#### i3
+exec i3

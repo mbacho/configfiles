@@ -1,0 +1,136 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
+
+
+##################### Begin my modzz ################################
+
+#aliases
+unalias ls
+alias ls='ls --color=always'
+alias ll='ls -l'
+alias la='ls -a'
+alias l='ls'
+alias cls='clear'
+alias rm='rm -iv'
+alias nano='nano -c'
+
+
+#skunkworks
+MY_PATH=/home/barbossa/sys
+
+#java stuff
+export JAVA_HOME=/usr/lib/java/jdk1.7.0_45/bin
+export JDK_HOME=$JAVA_HOME
+MY_PATH=$MY_PATH:$JAVA_HOME
+
+#Scala dev stuff
+MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/scala_runtime/bin
+MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/sbt/bin
+
+#heroku
+MY_PATH=$MY_PATH:/usr/local/heroku/bin
+
+#composer
+MY_PATH=$MY_PATH:/home/barbossa/r_n_d/composer
+
+#sml binaries
+MY_PATH=$MY_PATH:/home/barbossa/r_n_d/smlnj/bin
+
+#ruby gems
+MY_PATH=$MY_PATH:/home/barbossa/.gem/ruby/2.0.0/bin
+
+export PATH=$PATH:$MY_PATH
+
+#proxy stuff
+function proxyon(){
+  usr=p15%2F1263%2F2010%40students
+  pwd=6bd%40uon
+  srv=proxy.uonbi.ac.ke
+  port=80
+  export http_proxy="http://$usr:$pwd@$srv:$port"
+  export https_proxy=$http_proxy
+  export ftp_proxy=$http_proxy
+  export rsync_proxy=$http_proxy
+  export HTTP_PROXY=$http_proxy
+  export HTTPS_PROXY=$http_proxy
+  export FTP_PROXY=$http_proxy
+  export RSYNC_PROXY=$http_proxy
+  export no_proxy="localhost,127.0.0.1"
+  echo -e "Proxy iko kwa env\nWacha nieke kwa gnome"
+  
+  gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', '1.1.1.1']"
+  gsettings set org.gnome.system.proxy mode 'manual'
+  
+  gsettings set org.gnome.system.proxy.ftp host $srv
+  gsettings set org.gnome.system.proxy.ftp port $port
+  
+  gsettings set org.gnome.system.proxy.http authentication-password $usr
+  gsettings set org.gnome.system.proxy.http authentication-user $pwd
+  gsettings set org.gnome.system.proxy.http host $srv
+  gsettings set org.gnome.system.proxy.http port $port
+  gsettings set org.gnome.system.proxy.http use-authentication true
+  
+  gsettings set org.gnome.system.proxy.https host $srv
+  gsettings set org.gnome.system.proxy.https port $port
+  
+  gsettings set org.gnome.system.proxy.socks host $srv
+  gsettings set org.gnome.system.proxy.socks port $port
+  echo -e "Gnome imesortiwa."
+}
+function proxyoff(){
+  unset HTTP_PROXY
+  unset http_proxy
+  unset HTTPS_PROXY
+  unset https_proxy
+  unset FTP_PROXY
+  unset ftp_proxy
+  unset RSYNC_PROXY
+  unset rsync_proxy
+  echo -e "Proxy haiko kwa env\nWacha nitoe kwa gnome"
+  gsettings set org.gnome.system.proxy mode 'none'
+  echo -e "Fiti. Lakini proxy ya uni labda iko bado. Chuja na 'proxyoffuni'"
+}
+function proxyoffgnome(){
+  $empty=""
+  gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1']"
+  gsettings set org.gnome.system.proxy mode 'none'
+  
+  gsettings set org.gnome.system.proxy.ftp host $empty
+  gsettings set org.gnome.system.proxy.ftp port $empty
+  
+  gsettings set org.gnome.system.proxy.http authentication-password $empty
+  gsettings set org.gnome.system.proxy.http authentication-user $empty
+  gsettings set org.gnome.system.proxy.http host $empty
+  gsettings set org.gnome.system.proxy.http port $empty
+  gsettings set org.gnome.system.proxy.http use-authentication false
+  
+  gsettings set org.gnome.system.proxy.https host $empty
+  gsettings set org.gnome.system.proxy.https port $empty
+  
+  gsettings set org.gnome.system.proxy.socks host $empty
+  gsettings set org.gnome.system.proxy.socks port $empty
+} 
+function proxystatus(){
+  status="ha"
+  # -n test if non-empty
+  # -z empty
+  if [ -n "$http_proxy" ]; then
+    status=""
+  fi
+  echo -e Proxy "$status"iko "kwa env\nWacha nicheki gnome..."
+  gproxy=`gsettings get org.gnome.system.proxy mode`
+  status=""
+  if [ "$gproxy" == "'none'" ]; then
+    status="ha"
+  fi
+  echo -e "Proxy ya gnome" "$status"ik"o."
+}
+
+
