@@ -24,9 +24,9 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec "xterm -fg green -bg black"
+#bindsym $mod+Return exec "xterm -fg green -bg black"
 #bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -52,6 +52,7 @@ bindsym $mod+l exec i3lock -i ~/.i3/lockscreen.png
 #volume
 bindcode 123 exec --no-startup-id ~/sys/volume.sh up
 bindcode 122 exec --no-startup-id ~/sys/volume.sh down
+bindsym $mod+m exec --no-startup-id ~/sys/volume.sh mute
 
 #brightness
 bindcode 233 exec --no-startup-id ~/sys/brightness.sh up
@@ -73,6 +74,12 @@ bindsym $mod+Shift+b exec i3-msg border none
 
 #put container border
 bindsym $mod+b  exec i3-msg border normal
+
+#desktop wallpaper
+exec --no-startup-id sh ~/.fehbg
+
+#printscreen
+bindcode 107 exec --no-startup-id gnome-screenshot -i
 
 ###################### additional modz ends  #######################################
 

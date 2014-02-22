@@ -18,9 +18,12 @@ alias ll='ls -l'
 alias la='ls -a'
 alias l='ls'
 alias cls='clear'
-alias rm='rm -iv'
-alias nano='nano -c'
-
+alias rm='rm -Iv'
+alias mv='mv -iv'
+alias cp='cp -iv'
+alias file='file -i --mime-type'
+alias ping='ping -c5'
+alias exaunt='exit'
 
 #skunkworks
 MY_PATH=/home/barbossa/sys
@@ -37,24 +40,39 @@ MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/sbt/bin
 #heroku
 MY_PATH=$MY_PATH:/usr/local/heroku/bin
 
-#composer
+#php composer
 MY_PATH=$MY_PATH:/home/barbossa/r_n_d/composer
 
 #sml binaries
 MY_PATH=$MY_PATH:/home/barbossa/r_n_d/smlnj/bin
 
 #ruby gems
-MY_PATH=$MY_PATH:/home/barbossa/.gem/ruby/2.0.0/bin
+MY_PATH=$MY_PATH:/home/barbossa/.gem/ruby/2.1.0/bin
+
+#node modules
+MY_PATH=$MY_PATH:/home/barbossa/node_modules/.bin
 
 export PATH=$PATH:$MY_PATH
 
 #proxy stuff
-function proxyon(){
+#192.168.170.50 8080
+function uoncredz(){
   usr=p15%2F1263%2F2010%40students
   pwd=6bd%40uon
   srv=proxy.uonbi.ac.ke
   port=80
-  export http_proxy="http://$usr:$pwd@$srv:$port"
+  echo "$srv $port $usr $pwd"
+}
+function proxyon(){
+  #$1 server, $2 port, $3 usr, $4 pwd
+  export http_proxy="http://$1:$2"
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "yo...hujanipatia server ama port. nkt"
+    return
+  fi
+  if [ -n "$3" ]; then
+    export http_proxy="http://$3:$4@$1:$2"
+  fi
   export https_proxy=$http_proxy
   export ftp_proxy=$http_proxy
   export rsync_proxy=$http_proxy
@@ -63,25 +81,31 @@ function proxyon(){
   export FTP_PROXY=$http_proxy
   export RSYNC_PROXY=$http_proxy
   export no_proxy="localhost,127.0.0.1"
-  echo -e "Proxy iko kwa env\nWacha nieke kwa gnome"
-  
+  echo -e "Proxy iko kwa env\n"
+}
+function proxygnomeon(){
+  #$1 server, $2 port, $3 usr, $4 pwd
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "nkt...."
+    return
+  fi
   gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', '1.1.1.1']"
   gsettings set org.gnome.system.proxy mode 'manual'
   
-  gsettings set org.gnome.system.proxy.ftp host $srv
-  gsettings set org.gnome.system.proxy.ftp port $port
+  gsettings set org.gnome.system.proxy.ftp host $1
+  gsettings set org.gnome.system.proxy.ftp port $2
   
-  gsettings set org.gnome.system.proxy.http authentication-password $usr
-  gsettings set org.gnome.system.proxy.http authentication-user $pwd
-  gsettings set org.gnome.system.proxy.http host $srv
-  gsettings set org.gnome.system.proxy.http port $port
+  gsettings set org.gnome.system.proxy.http authentication-user $3
+  gsettings set org.gnome.system.proxy.http authentication-password $4
+  gsettings set org.gnome.system.proxy.http host $1
+  gsettings set org.gnome.system.proxy.http port $2
   gsettings set org.gnome.system.proxy.http use-authentication true
   
-  gsettings set org.gnome.system.proxy.https host $srv
-  gsettings set org.gnome.system.proxy.https port $port
+  gsettings set org.gnome.system.proxy.https host $1
+  gsettings set org.gnome.system.proxy.https port $2
   
-  gsettings set org.gnome.system.proxy.socks host $srv
-  gsettings set org.gnome.system.proxy.socks port $port
+  gsettings set org.gnome.system.proxy.socks host $1
+  gsettings set org.gnome.system.proxy.socks port $2
   echo -e "Gnome imesortiwa."
 }
 function proxyoff(){
@@ -93,12 +117,10 @@ function proxyoff(){
   unset ftp_proxy
   unset RSYNC_PROXY
   unset rsync_proxy
-  echo -e "Proxy haiko kwa env\nWacha nitoe kwa gnome"
-  gsettings set org.gnome.system.proxy mode 'none'
-  echo -e "Fiti. Lakini proxy ya uni labda iko bado. Chuja na 'proxyoffuni'"
+  echo -e "Proxy imechujwa kutoka env"
 }
-function proxyoffgnome(){
-  $empty=""
+function proxygnomeoff(){
+  empty=""
   gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1']"
   gsettings set org.gnome.system.proxy mode 'none'
   
