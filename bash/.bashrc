@@ -24,6 +24,8 @@ alias cp='cp -iv'
 alias file='file -i --mime-type'
 alias ping='ping -c5'
 alias exaunt='exit'
+alias pyserver='python -m SimpleHTTPServer'
+alias nano_plain='nano -I'
 
 #skunkworks
 MY_PATH=/home/barbossa/sys

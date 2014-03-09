@@ -5,6 +5,8 @@ set const
 set nowrap
 set smooth
 set softwrap
+set smarthome
+set nonewlines
 
 include /home/barbossa/nanorc/scopatz_nanorc/apacheconf.nanorc
 include /home/barbossa/nanorc/scopatz_nanorc/asciidoc.nanorc
