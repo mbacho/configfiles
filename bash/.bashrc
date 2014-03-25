@@ -23,7 +23,7 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias file='file -i --mime-type'
 alias ping='ping -c5'
-alias exaunt='exit'
+alias exaunt='systemctl poweroff'
 alias pyserver='python -m SimpleHTTPServer'
 alias nano_plain='nano -I'
 
@@ -122,24 +122,26 @@ function proxyoff(){
   echo -e "Proxy imechujwa kutoka env"
 }
 function proxygnomeoff(){
-  empty=""
+  default_port=0
   gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1']"
   gsettings set org.gnome.system.proxy mode 'none'
   
-  gsettings set org.gnome.system.proxy.ftp host $empty
-  gsettings set org.gnome.system.proxy.ftp port $empty
+  gsettings set org.gnome.system.proxy.ftp host ""
+  gsettings set org.gnome.system.proxy.ftp port $default_port
   
-  gsettings set org.gnome.system.proxy.http authentication-password $empty
-  gsettings set org.gnome.system.proxy.http authentication-user $empty
-  gsettings set org.gnome.system.proxy.http host $empty
-  gsettings set org.gnome.system.proxy.http port $empty
+  gsettings set org.gnome.system.proxy.http authentication-password ""
+  gsettings set org.gnome.system.proxy.http authentication-user ""
+  gsettings set org.gnome.system.proxy.http host ""
+  gsettings set org.gnome.system.proxy.http port $default_port
   gsettings set org.gnome.system.proxy.http use-authentication false
   
-  gsettings set org.gnome.system.proxy.https host $empty
-  gsettings set org.gnome.system.proxy.https port $empty
+  gsettings set org.gnome.system.proxy.https host ""
+  gsettings set org.gnome.system.proxy.https port $default_port
   
-  gsettings set org.gnome.system.proxy.socks host $empty
-  gsettings set org.gnome.system.proxy.socks port $empty
+  gsettings set org.gnome.system.proxy.socks host ""
+  gsettings set org.gnome.system.proxy.socks port $default_port
+  echo -e "Proxy imechujwa kutoka gnome"
+    
 } 
 function proxystatus(){
   status="ha"
