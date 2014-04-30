@@ -5,14 +5,18 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 
 ##################### Begin my modzz ################################
+echo -e "\n"
+fortune
+echo -e "\n"
+
+#git stuff
+source  /usr/share/git/git-prompt.sh
 
 #aliases
-unalias ls
 alias ls='ls --color=always'
 alias ll='ls -l'
 alias la='ls -a'
@@ -160,3 +164,20 @@ function proxystatus(){
 }
 
 
+function set_prompt(){
+  color_brown='\[\e[01;33m\]'
+  color_red='\[\e[01;31m\]'
+  color_reset='\[\e[00m\]'
+  
+  PS1=""
+  
+  if [[ $? != 0 ]]; then
+    PS1+="$color_red$? :($color_reset "
+  fi
+  
+  PS1+="\\u@\\h \\W"
+  
+  #add git prompt
+  PS1+="$color_brown$(__git_ps1 ' (%s)')$color_reset \\\$ "
+}
+PROMPT_COMMAND='set_prompt'
