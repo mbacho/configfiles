@@ -10,7 +10,7 @@ PS1='[\u@\h \W]\$ '
 
 ##################### Begin my modzz ################################
 echo -e "\n"
-fortune
+fortune -aes
 echo -e "\n"
 
 #git stuff
