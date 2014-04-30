@@ -165,14 +165,15 @@ function proxystatus(){
 
 
 function set_prompt(){
+  last_cmd_status=$?
   color_brown='\[\e[01;33m\]'
   color_red='\[\e[01;31m\]'
   color_reset='\[\e[00m\]'
   
-  PS1=""
+  PS1=":) "
   
-  if [[ $? != 0 ]]; then
-    PS1+="$color_red$? :($color_reset "
+  if [[ $last_cmd_status != 0 ]]; then
+    PS1="$color_red$last_cmd_status :($color_reset "
   fi
   
   PS1+="\\u@\\h \\W"
