@@ -8,7 +8,29 @@
 PS1='[\u@\h \W]\$ '
 
 
-##################### Begin my modzz ################################
+#
+# ignorespace  : ignore commands that start with spaces
+# ignoredups   : ignore duplicates
+# Specify both : Concatenate and separate the values with a colon ignorespace:ignoredups or specify ignoreboth.
+#
+export HISTCONTROL=ignoreboth
+
+
+# Settings
+# Don't exit when accidentally pressing ^D
+set -o ignoreeof
+
+# Append, rather than overwrite history files
+# Useful for when multiple bash sessions are running
+shopt -s histappend
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+
+
+#some quote
 echo -e "\n"
 fortune -aes
 echo -e "\n"
@@ -17,7 +39,7 @@ echo -e "\n"
 source  /usr/share/git/git-prompt.sh
 
 #aliases
-alias ls='ls --color=always'
+alias ls='ls --color=always -F'
 alias ll='ls -l'
 alias la='ls -a'
 alias l='ls'
@@ -30,6 +52,7 @@ alias ping='ping -c5'
 alias exaunt='systemctl poweroff'
 alias pyserver='python -m SimpleHTTPServer'
 alias nano_plain='nano -I'
+alias less='less -R'
 
 #skunkworks
 MY_PATH=/home/barbossa/sys
@@ -60,8 +83,8 @@ MY_PATH=$MY_PATH:/home/barbossa/node_modules/.bin
 
 export PATH=$PATH:$MY_PATH
 
+
 #proxy stuff
-#192.168.170.50 8080
 function uoncredz(){
   usr=p15%2F1263%2F2010%40students
   pwd=6bd%40uon
@@ -163,22 +186,35 @@ function proxystatus(){
   echo -e "Proxy ya gnome" "$status"ik"o."
 }
 
-
+#prompt generation
 function set_prompt(){
   last_cmd_status=$?
   color_brown='\[\e[01;33m\]'
   color_red='\[\e[01;31m\]'
   color_reset='\[\e[00m\]'
+  color_cyan='\[\e[01;32m\]'
   
-  PS1=":) "
+  status=':)'
+  body=''
   
   if [[ $last_cmd_status != 0 ]]; then
-    PS1="$color_red$last_cmd_status :($color_reset "
+    status="$color_red$last_cmd_status :($color_reset"
   fi
   
-  PS1+="\\u@\\h \\W"
+  body="\\u@\\h \\W"
   
   #add git prompt
-  PS1+="$color_brown$(__git_ps1 ' (%s)')$color_reset \\\$ "
+  body+="$color_brown$(__git_ps1 ' (%s)')$color_reset \\\$ "
+  
+  #support for virtualenv names
+  env_name=''
+  if [ -n "$VIRTUAL_ENV" ]; then
+    if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
+        env_name="[`basename \`dirname \"$VIRTUAL_ENV\"\``]"
+    else
+        env_name="(`basename \"$VIRTUAL_ENV\"`)"
+    fi
+  fi
+  PS1="$status $color_cyan$env_name$color_reset $body"
 }
 PROMPT_COMMAND='set_prompt'
