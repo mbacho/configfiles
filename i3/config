@@ -60,7 +60,6 @@ bindcode 232 exec --no-startup-id ~/sys/brightness.sh down
 
 #playback
 
-#screenshot
 
 #yeah you know
 focus_follows_mouse no
@@ -76,9 +75,10 @@ bindsym $mod+Shift+b exec i3-msg border none
 bindsym $mod+b  exec i3-msg border normal
 
 #desktop wallpaper
-exec --no-startup-id sh ~/.fehbg
+#exec --no-startup-id sh ~/.i3/fehbg
+exec --no-startup-id sh ~/.i3/mplayerbg
 
-#printscreen
+#printscreen / screenshot
 bindcode 107 exec --no-startup-id gnome-screenshot -i
 
 ###################### additional modz ends  #######################################

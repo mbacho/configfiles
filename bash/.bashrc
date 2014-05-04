@@ -5,95 +5,96 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PS1='[\u@\h \W]\$ '
+### start imports
+
+# git stuff
+source /usr/share/git/git-prompt.sh
+
+### end imports
 
 
-#
-# ignorespace  : ignore commands that start with spaces
-# ignoredups   : ignore duplicates
-# Specify both : Concatenate and separate the values with a colon ignorespace:ignoredups or specify ignoreboth.
-#
-export HISTCONTROL=ignoreboth
+function shell_opts(){
+  #
+  # ignorespace  : ignore commands that start with spaces
+  # ignoredups   : ignore duplicates
+  # Both : use "ignorespace:ignoredups" or "ignoreboth"
+  #
+  export HISTCONTROL=ignoreboth
 
+  # Don't exit when accidentally pressing ^D
+  set -o ignoreeof
 
-# Settings
-# Don't exit when accidentally pressing ^D
-set -o ignoreeof
+  # Append, rather than overwrite history files
+  shopt -s histappend
 
-# Append, rather than overwrite history files
-# Useful for when multiple bash sessions are running
-shopt -s histappend
+  # Check the window size after each command and, if necessary,
+  # update the values of LINES and COLUMNS.
+  shopt -s checkwinsize
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+  # Save all lines of a multiple-line command in the same history entry.
+  # This allows easy re-editing of multi-line commands.
+  shopt -s cmdhist
 
+  # Includes filenames beginning with a `.' in the results of pathname expansion.
+  # shopt -s dotglob
+}
 
+function alias_setup(){
+  alias ls='ls --color=always -F'
+  alias ll='ls -l'
+  alias la='ls -a'
+  alias l='ls'
+  alias cls='clear'
+  alias rm='rm -Iv'
+  alias mv='mv -iv'
+  alias cp='cp -iv'
+  alias file='file -i --mime-type'
+  alias ping='ping -c5'
+  alias exaunt='systemctl poweroff'
+  alias pyserver='python -m SimpleHTTPServer'
+  alias nano_plain='nano -I'
+  alias less='less -R'
+}
+function env_setup(){
+  # skunkworks
+  local MY_PATH=/home/barbossa/sys
 
-#some quote
-echo -e "\n"
-fortune -aes
-echo -e "\n"
+  if [[ $PATH != *$MY_PATH* ]]; then
+    # java stuff
+    export JAVA_HOME=/usr/lib/java/jdk1.7.0_45/bin
+    export JDK_HOME=$JAVA_HOME
+    MY_PATH=$MY_PATH:$JAVA_HOME
 
-#git stuff
-source  /usr/share/git/git-prompt.sh
+    # Scala dev stuff
+    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/scala_runtime/bin
+    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/sbt/bin
 
-#aliases
-alias ls='ls --color=always -F'
-alias ll='ls -l'
-alias la='ls -a'
-alias l='ls'
-alias cls='clear'
-alias rm='rm -Iv'
-alias mv='mv -iv'
-alias cp='cp -iv'
-alias file='file -i --mime-type'
-alias ping='ping -c5'
-alias exaunt='systemctl poweroff'
-alias pyserver='python -m SimpleHTTPServer'
-alias nano_plain='nano -I'
-alias less='less -R'
+    # heroku
+    MY_PATH=$MY_PATH:/usr/local/heroku/bin
 
-#skunkworks
-MY_PATH=/home/barbossa/sys
+    # php composer
+    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/composer
 
-#java stuff
-export JAVA_HOME=/usr/lib/java/jdk1.7.0_45/bin
-export JDK_HOME=$JAVA_HOME
-MY_PATH=$MY_PATH:$JAVA_HOME
+    # sml binaries
+    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/smlnj/bin
 
-#Scala dev stuff
-MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/scala_runtime/bin
-MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/sbt/bin
+    # ruby gems
+    MY_PATH=$MY_PATH:/home/barbossa/.gem/ruby/2.1.0/bin
 
-#heroku
-MY_PATH=$MY_PATH:/usr/local/heroku/bin
-
-#php composer
-MY_PATH=$MY_PATH:/home/barbossa/r_n_d/composer
-
-#sml binaries
-MY_PATH=$MY_PATH:/home/barbossa/r_n_d/smlnj/bin
-
-#ruby gems
-MY_PATH=$MY_PATH:/home/barbossa/.gem/ruby/2.1.0/bin
-
-#node modules
-MY_PATH=$MY_PATH:/home/barbossa/node_modules/.bin
-
-export PATH=$PATH:$MY_PATH
-
-
-#proxy stuff
+    # node modules
+    MY_PATH=$MY_PATH:/home/barbossa/node_modules/.bin
+    export PATH="$PATH:$MY_PATH"
+  fi
+}
 function uoncredz(){
-  usr=p15%2F1263%2F2010%40students
-  pwd=6bd%40uon
-  srv=proxy.uonbi.ac.ke
-  port=80
+  local usr=p15%2F1263%2F2010%40students
+  local pwd=6bd%40uon
+  local srv=proxy.uonbi.ac.ke
+  local port=80
   echo "$srv $port $usr $pwd"
 }
 function proxyon(){
-  #$1 server, $2 port, $3 usr, $4 pwd
+  # $1 server, $2 port, $3 usr, $4 pwd
   export http_proxy="http://$1:$2"
   if [ -z "$1" ] || [ -z "$2" ]; then
     echo "yo...hujanipatia server ama port. nkt"
@@ -113,7 +114,7 @@ function proxyon(){
   echo -e "Proxy iko kwa env\n"
 }
 function proxygnomeon(){
-  #$1 server, $2 port, $3 usr, $4 pwd
+  # $1 server, $2 port, $3 usr, $4 pwd
   if [ -z "$1" ] || [ -z "$2" ]; then
     echo "nkt...."
     return
@@ -138,18 +139,14 @@ function proxygnomeon(){
   echo -e "Gnome imesortiwa."
 }
 function proxyoff(){
-  unset HTTP_PROXY
-  unset http_proxy
-  unset HTTPS_PROXY
-  unset https_proxy
-  unset FTP_PROXY
-  unset ftp_proxy
-  unset RSYNC_PROXY
-  unset rsync_proxy
+  unset HTTP_PROXY http_proxy
+  unset HTTPS_PROXY https_proxy
+  unset FTP_PROXY ftp_proxy
+  unset RSYNC_PROXY rsync_proxy
   echo -e "Proxy imechujwa kutoka env"
 }
 function proxygnomeoff(){
-  default_port=0
+  local default_port=0
   gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1']"
   gsettings set org.gnome.system.proxy mode 'none'
   
@@ -168,17 +165,16 @@ function proxygnomeoff(){
   gsettings set org.gnome.system.proxy.socks host ""
   gsettings set org.gnome.system.proxy.socks port $default_port
   echo -e "Proxy imechujwa kutoka gnome"
-    
 } 
 function proxystatus(){
-  status="ha"
+  local status="ha"
   # -n test if non-empty
   # -z empty
   if [ -n "$http_proxy" ]; then
     status=""
   fi
   echo -e Proxy "$status"iko "kwa env\nWacha nicheki gnome..."
-  gproxy=`gsettings get org.gnome.system.proxy mode`
+  local gproxy=`gsettings get org.gnome.system.proxy mode`
   status=""
   if [ "$gproxy" == "'none'" ]; then
     status="ha"
@@ -186,16 +182,16 @@ function proxystatus(){
   echo -e "Proxy ya gnome" "$status"ik"o."
 }
 
-#prompt generation
+# cmd prompt generation
 function set_prompt(){
-  last_cmd_status=$?
-  color_brown='\[\e[01;33m\]'
-  color_red='\[\e[01;31m\]'
-  color_reset='\[\e[00m\]'
-  color_cyan='\[\e[01;32m\]'
+  local last_cmd_status=$?
+  local color_brown='\[\e[01;33m\]'
+  local color_red='\[\e[01;31m\]'
+  local color_reset='\[\e[00m\]'
+  local color_cyan='\[\e[01;32m\]'
   
-  status=':)'
-  body=''
+  local status=':)'
+  local body=''
   
   if [[ $last_cmd_status != 0 ]]; then
     status="$color_red$last_cmd_status :($color_reset"
@@ -203,11 +199,11 @@ function set_prompt(){
   
   body="\\u@\\h \\W"
   
-  #add git prompt
+  # add git prompt
   body+="$color_brown$(__git_ps1 ' (%s)')$color_reset \\\$ "
   
-  #support for virtualenv names
-  env_name=''
+  # support for virtualenv names
+  local env_name=''
   if [ -n "$VIRTUAL_ENV" ]; then
     if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
         env_name="[`basename \`dirname \"$VIRTUAL_ENV\"\``]"
@@ -217,4 +213,14 @@ function set_prompt(){
   fi
   PS1="$status $color_cyan$env_name$color_reset $body"
 }
+
+# failover just incase prompt_command fails
+PS1='[\u@\h \W]\$ '
+
+# some 'wise' saying
+echo -e "\n$(fortune -aes)\n"
+
+shell_opts
+alias_setup
+env_setup
 PROMPT_COMMAND='set_prompt'

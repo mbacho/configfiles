@@ -1,0 +1,1 @@
+mplayer -loop 0 -rootwin -ao null -noconsolecontrols -nofs -speed 0.5 '/home/barbossa/.i3/animation_2.gif'

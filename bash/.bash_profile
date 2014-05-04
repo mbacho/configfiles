@@ -2,9 +2,8 @@
 # ~/.bash_profile
 #
 
+echo -e "\nArr, there matey! Ye r aboard the $(hostname), $USER\n"
+
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-
-HOST_NAME=`hostname`
-echo -e "Arr, there matey! Ye r aboard the $HOST_NAME, $USER\n"
 
