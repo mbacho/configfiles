@@ -50,10 +50,13 @@ function alias_setup(){
   alias cp='cp -iv'
   alias file='file -i --mime-type'
   alias ping='ping -c5'
-  alias exaunt='systemctl poweroff'
+  alias exeunt='systemctl poweroff'
   alias pyserver='python -m SimpleHTTPServer'
   alias nano_plain='nano -I'
   alias less='less -R'
+#  alias udm='udisksctl mount --block-device'
+#  alias udum'udisksctl unmount --block-device'
+#  alias udpo='udisksctl power-off --block-device'
 }
 function env_setup(){
   # skunkworks
@@ -63,6 +66,10 @@ function env_setup(){
     # java stuff
     export JAVA_HOME=/usr/lib/java/jdk1.7.0_45/bin
     export JDK_HOME=$JAVA_HOME
+    
+    #pip download cache
+    export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
+    
     MY_PATH=$MY_PATH:$JAVA_HOME
 
     # Scala dev stuff
@@ -84,6 +91,7 @@ function env_setup(){
     # node modules
     MY_PATH=$MY_PATH:/home/barbossa/node_modules/.bin
     export PATH="$PATH:$MY_PATH"
+    
   fi
 }
 function uoncredz(){
