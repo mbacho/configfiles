@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+YOWSUP_CLI="/home/barbossa/r_n_d/yowsup/src/src/yowsup-cli"
+CONFIG_FILE="/home/barbossa/r_n_d/yowsup/mbacho.config"
+
+python "$YOWSUP_CLI" $@ -c "$CONFIG_FILE"

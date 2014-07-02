@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+#push or pull multiple files using adb in one go
+
+usage() {
+    echo "Usage : $0 command source_files destination"
+    echo -e "commands\n    push : push local source files to remote destination\t\n    pull : pull remote source files to local destination"
+}
+
+len=$#
+
+if [ $len -lt  3 ]; then
+    usage
+    exit 1
+fi
+
+adb=`which adb > /dev/null`
+
+if [ $? -ne 0 ]; then
+  echo "adb not found"
+  exit 1
+fi
+
+command=$1
+if [ "$command" != "push" ] && [ "$command" != "pull" ]; then
+  echo "invalid command"
+  usage
+  exit 1
+fi
+echo "$command"ing stuff...
+shift
+
+folder="${@: -1}"
+
+until [ -z "$1" ]
+do
+  if [ "$folder" != "$1" ]; then
+    echo "$1 ==> $folder"
+    `adb $command "$1" "$folder"`
+    if [ $? -ne 0 ]; then
+      echo "error occured"
+      exit 1
+    fi
+  fi
+  shift
+done
+

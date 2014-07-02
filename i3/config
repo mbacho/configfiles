@@ -75,12 +75,14 @@ bindsym $mod+Shift+b exec i3-msg border none
 bindsym $mod+b  exec i3-msg border normal
 
 #desktop wallpaper
-#exec --no-startup-id sh ~/.i3/fehbg
-exec --no-startup-id sh ~/.i3/mplayerbg
+exec --no-startup-id sh ~/.i3/fehbg
+# exec --no-startup-id sh ~/.i3/mplayerbg
 
 #printscreen / screenshot
 bindcode 107 exec --no-startup-id gnome-screenshot -i
 
+
+assign [class="jetbrains-pycharm"] 3
 ###################### additional modz ends  #######################################
 
 
