@@ -54,6 +54,8 @@ function alias_setup(){
   alias pyserver='python -m SimpleHTTPServer'
   alias nano_plain='nano -I'
   alias less='less -R'
+  alias rsync='rsync -vrhi --progress'
+  alias makepkg='makepkg --syncdeps --verifysource'
 #  alias udm='udisksctl mount --block-device'
 #  alias udum'udisksctl unmount --block-device'
 #  alias udpo='udisksctl power-off --block-device'
