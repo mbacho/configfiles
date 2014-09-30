@@ -1,0 +1,36 @@
+{
+	"always_prompt_for_file_reload": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"dictionary": "Packages/Language - English/en_GB.dic",
+	"ensure_newline_at_eof_on_save": true,
+	"fade_fold_buttons": false,
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".git",
+		".hg",
+		"CVS",
+		"build",
+		"vendor",
+		"node_modules"
+	],
+	"font_size": 10,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"rulers":
+	[
+		80,
+		100
+	],
+	"shift_tab_unindent": true,
+	"show_encoding": true,
+	"show_line_endings": false,
+	"show_tab_close_buttons": true,
+	"translate_tabs_to_spaces": true,
+	"word_wrap": "auto"
+}
