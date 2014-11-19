@@ -10,6 +10,13 @@
 # git stuff
 source /usr/share/git/git-prompt.sh
 
+# gcutil stuff
+# The next line updates PATH for the Google Cloud SDK.
+# source '/home/barbossa/r_n_d/gcutils/google-cloud-sdk/path.bash.inc'
+
+# The next line enables bash completion for gcloud.
+# source '/home/barbossa/r_n_d/gcutils/google-cloud-sdk/completion.bash.inc'
+export CLOUDSDK_PYTHON='python2'
 ### end imports
 
 
@@ -51,14 +58,15 @@ function alias_setup(){
   alias file='file -i --mime-type'
   alias ping='ping -c5'
   alias exeunt='systemctl poweroff'
-  alias pyserver='python -m SimpleHTTPServer'
+  alias pyserver='python2 -m SimpleHTTPServer'
   alias nano_plain='nano -I'
   alias less='less -R'
   alias rsync='rsync -vrhi --progress'
   alias makepkg='makepkg --syncdeps --verifysource'
-#  alias udm='udisksctl mount --block-device'
-#  alias udum'udisksctl unmount --block-device'
-#  alias udpo='udisksctl power-off --block-device'
+  alias rmpyc='find -iname "*.pyc" | xargs rm'
+  alias udm='udisksctl mount --block-device'
+  alias udum='udisksctl unmount --block-device'
+  alias udpo='udisksctl power-off --block-device'
 }
 function env_setup(){
   # skunkworks
@@ -66,13 +74,13 @@ function env_setup(){
 
   if [[ $PATH != *$MY_PATH* ]]; then
     # java stuff
-    export JAVA_HOME=/usr/lib/java/jdk1.7.0_45/bin
+    export JAVA_HOME=/usr/lib/java/jdk1.8.0_11
     export JDK_HOME=$JAVA_HOME
     
     #pip download cache
     export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
     
-    MY_PATH=$MY_PATH:$JAVA_HOME
+    MY_PATH=$MY_PATH:$JAVA_HOME/bin
 
     # Scala dev stuff
     MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/scala_runtime/bin
