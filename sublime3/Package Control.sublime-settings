@@ -1,0 +1,20 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Anaconda",
+		"AsciiDoc",
+		"Emmet",
+		"GitGutter",
+		"JSHint Gutter",
+		"Package Control",
+		"SublimeGit",
+		"SublimeLinter",
+		"SublimeLinter-cpplint",
+		"SublimeLinter-flake8",
+		"SublimeLinter-jshint",
+		"Theme - Flatland"
+	]
+}

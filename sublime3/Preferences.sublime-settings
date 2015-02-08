@@ -1,10 +1,33 @@
 {
 	"always_prompt_for_file_reload": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"caret_style": "phase",
+	"color_scheme": "Packages/User/Flatland Monokai (SL).tmTheme",
 	"dictionary": "Packages/Language - English/en_GB.dic",
 	"ensure_newline_at_eof_on_save": true,
 	"fade_fold_buttons": false,
+	"file_exclude_patterns":
+	[
+		"*.pyc",
+		"*.pyo",
+		"*.obj",
+		"*.o",
+		"*.a",
+		"*.lib",
+		"*.so",
+		"*.dylib",
+		"*.ncb",
+		"*.sdf",
+		"*.suo",
+		"*.pdb",
+		"*.idb",
+		"*.class",
+		"*.psd",
+		"*.db",
+		"*.sublime-workspace",
+		".coverage"
+	],
+	"flatland_square_tabs": false,
 	"folder_exclude_patterns":
 	[
 		".svn",
@@ -13,13 +36,25 @@
 		"CVS",
 		"build",
 		"vendor",
-		"node_modules"
+		"bower_components",
+		"node_modules",
+		".tox",
+		"coverage",
+		"*.egg-info",
+		"__pycache__",
+		"htmlcov"
 	],
-	"font_size": 10,
+	"font_face": "Inconsolata",
+	"font_size": 11,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"SublimeLinter-flake8",
+		"SublimeLinter",
+		"SublimeLinter-cpplint",
+		"Markdown",
+		"SublimeLinter-jshint",
 		"Vintage"
 	],
 	"rulers":
@@ -32,5 +67,6 @@
 	"show_line_endings": false,
 	"show_tab_close_buttons": true,
 	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
 	"word_wrap": "auto"
 }

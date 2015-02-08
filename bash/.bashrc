@@ -10,13 +10,15 @@
 # git stuff
 source /usr/share/git/git-prompt.sh
 
+
 # gcutil stuff
 # The next line updates PATH for the Google Cloud SDK.
-# source '/home/barbossa/r_n_d/gcutils/google-cloud-sdk/path.bash.inc'
+source '/home/barbossa/r_n_d/gcutils/google-cloud-sdk/path.bash.inc'
 
 # The next line enables bash completion for gcloud.
-# source '/home/barbossa/r_n_d/gcutils/google-cloud-sdk/completion.bash.inc'
+source '/home/barbossa/r_n_d/gcutils/google-cloud-sdk/completion.bash.inc'
 export CLOUDSDK_PYTHON='python2'
+
 ### end imports
 
 
@@ -49,7 +51,8 @@ function shell_opts(){
 function alias_setup(){
   alias ls='ls --color=always -F'
   alias ll='ls -l'
-  alias la='ls -a'
+  alias lt='ls -t'
+  alias la='ls -A'
   alias l='ls'
   alias cls='clear'
   alias rm='rm -Iv'
@@ -64,9 +67,12 @@ function alias_setup(){
   alias rsync='rsync -vrhi --progress'
   alias makepkg='makepkg --syncdeps --verifysource'
   alias rmpyc='find -iname "*.pyc" | xargs rm'
+  alias rmpycache='find -iname "__pycache__" | xargs rm -rf'
   alias udm='udisksctl mount --block-device'
   alias udum='udisksctl unmount --block-device'
   alias udpo='udisksctl power-off --block-device'
+  alias emacs_nw='emacs -nw'
+  alias incognito="unset HISTFILE HISTFILESIZE HISTCONTROL HISTSIZE"
 }
 function env_setup(){
   # skunkworks
@@ -76,10 +82,10 @@ function env_setup(){
     # java stuff
     export JAVA_HOME=/usr/lib/java/jdk1.8.0_11
     export JDK_HOME=$JAVA_HOME
-    
+
     #pip download cache
     export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
-    
+
     MY_PATH=$MY_PATH:$JAVA_HOME/bin
 
     # Scala dev stuff
@@ -101,7 +107,8 @@ function env_setup(){
     # node modules
     MY_PATH=$MY_PATH:/home/barbossa/node_modules/.bin
     export PATH="$PATH:$MY_PATH"
-    
+
+    export WORKON_HOME=$HOME/venvs
   fi
 }
 function uoncredz(){
@@ -139,19 +146,19 @@ function proxygnomeon(){
   fi
   gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', '1.1.1.1']"
   gsettings set org.gnome.system.proxy mode 'manual'
-  
+
   gsettings set org.gnome.system.proxy.ftp host $1
   gsettings set org.gnome.system.proxy.ftp port $2
-  
+
   gsettings set org.gnome.system.proxy.http authentication-user $3
   gsettings set org.gnome.system.proxy.http authentication-password $4
   gsettings set org.gnome.system.proxy.http host $1
   gsettings set org.gnome.system.proxy.http port $2
   gsettings set org.gnome.system.proxy.http use-authentication true
-  
+
   gsettings set org.gnome.system.proxy.https host $1
   gsettings set org.gnome.system.proxy.https port $2
-  
+
   gsettings set org.gnome.system.proxy.socks host $1
   gsettings set org.gnome.system.proxy.socks port $2
   echo -e "Gnome imesortiwa."
@@ -167,23 +174,23 @@ function proxygnomeoff(){
   local default_port=0
   gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1']"
   gsettings set org.gnome.system.proxy mode 'none'
-  
+
   gsettings set org.gnome.system.proxy.ftp host ""
   gsettings set org.gnome.system.proxy.ftp port $default_port
-  
+
   gsettings set org.gnome.system.proxy.http authentication-password ""
   gsettings set org.gnome.system.proxy.http authentication-user ""
   gsettings set org.gnome.system.proxy.http host ""
   gsettings set org.gnome.system.proxy.http port $default_port
   gsettings set org.gnome.system.proxy.http use-authentication false
-  
+
   gsettings set org.gnome.system.proxy.https host ""
   gsettings set org.gnome.system.proxy.https port $default_port
-  
+
   gsettings set org.gnome.system.proxy.socks host ""
   gsettings set org.gnome.system.proxy.socks port $default_port
   echo -e "Proxy imechujwa kutoka gnome"
-} 
+}
 function proxystatus(){
   local status="ha"
   # -n test if non-empty
@@ -207,19 +214,19 @@ function set_prompt(){
   local color_red='\[\e[01;31m\]'
   local color_reset='\[\e[00m\]'
   local color_cyan='\[\e[01;32m\]'
-  
+
   local status=':)'
   local body=''
-  
+
   if [[ $last_cmd_status != 0 ]]; then
     status="$color_red$last_cmd_status :($color_reset"
   fi
-  
-  body="\\u@\\h \\W"
-  
+
+  body="\\u ole \\h \\W"
+
   # add git prompt
   body+="$color_brown$(__git_ps1 ' (%s)')$color_reset \\\$ "
-  
+
   # support for virtualenv names
   local env_name=''
   if [ -n "$VIRTUAL_ENV" ]; then
