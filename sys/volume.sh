@@ -14,11 +14,11 @@ if [ $# != 1 ]; then
     usage
 fi
 
-default_sink=$(pactl stat | grep -i "default sink" | awk '{print $3}')
+default_sink=$(pactl info | grep -i "default sink" | awk '{print $3}')
 current_volume=$(pacmd dump | grep -i "set-sink-volume $default_sink" | awk '{print $3}')
-current_volume=$(python -c "print int($current_volume)")
-max_vol_start=$(python -c "print int(0x10000)")
-max_vol_end=$(python -c "print int(0xf500)")
+current_volume=$(python2 -c "print int($current_volume)")
+max_vol_start=$(python2 -c "print int(0x10000)")
+max_vol_end=$(python2 -c "print int(0xf500)")
 #${current_volume:2}
 volume_delta=5
 change=""
@@ -52,6 +52,6 @@ case "$1" in
 esac
 
 if [ -n "$change" ]; then
-    `pactl set-sink-volume "$default_sink" -- $change$volume_delta%`
+    `pactl set-sink-volume "$default_sink" $change$volume_delta%`
 fi
 
