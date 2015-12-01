@@ -3,5 +3,7 @@
 	name = Chomba Ng'ang'a
 	signingkey = 23C941C7
 [core]
-	editor = nano
+	editor = vim
 	ui = true
+[commit]
+	template = /home/barbossa/.gitcommit_template

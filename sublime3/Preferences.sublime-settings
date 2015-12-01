@@ -1,5 +1,6 @@
 {
 	"always_prompt_for_file_reload": true,
+	"atomic_save": false,
 	"bold_folder_labels": true,
 	"caret_style": "phase",
 	"color_scheme": "Packages/User/Flatland Monokai (SL).tmTheme",
@@ -34,6 +35,7 @@
 		".git",
 		".hg",
 		"CVS",
+		"bin",
 		"build",
 		"vendor",
 		"bower_components",
@@ -42,7 +44,8 @@
 		"coverage",
 		"*.egg-info",
 		"__pycache__",
-		"htmlcov"
+		"htmlcov",
+		"html_tests"
 	],
 	"font_face": "Inconsolata",
 	"font_size": 11,
@@ -50,13 +53,13 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"SublimeLinter-flake8",
-		"SublimeLinter",
-		"SublimeLinter-cpplint",
+		"AngularJS",
 		"Markdown",
-		"SublimeLinter-jshint",
-		"Vintage"
+		"SublimeLinter-cpplint",
+		"Vintage",
+		"Vintageous"
 	],
+	"overlay_scroll_bars": "enabled",
 	"rulers":
 	[
 		80,

@@ -55,7 +55,7 @@ function alias_setup(){
   alias la='ls -A'
   alias l='ls'
   alias cls='clear'
-  alias rm='rm -Iv'
+  alias rm='rm -iv'
   alias mv='mv -iv'
   alias cp='cp -iv'
   alias file='file -i --mime-type'
@@ -67,42 +67,24 @@ function alias_setup(){
   alias rsync='rsync -vrhi --progress'
   alias makepkg='makepkg --syncdeps --verifysource'
   alias rmpyc='find -iname "*.pyc" | xargs rm'
-  alias rmpycache='find -iname "__pycache__" | xargs rm -rf'
+  alias rmpycache='find -iname "__pycache__" | xargs rm -r'
   alias udm='udisksctl mount --block-device'
   alias udum='udisksctl unmount --block-device'
   alias udpo='udisksctl power-off --block-device'
-  alias emacs_nw='emacs -nw'
+  alias emacs='emacs -nw'
   alias incognito="unset HISTFILE HISTFILESIZE HISTCONTROL HISTSIZE"
+  alias m='mplayer -fs'
+  alias nano='vim'
 }
 function env_setup(){
   # skunkworks
   local MY_PATH=/home/barbossa/sys
 
   if [[ $PATH != *$MY_PATH* ]]; then
-    # java stuff
-    export JAVA_HOME=/usr/lib/java/jdk1.8.0_11
-    export JDK_HOME=$JAVA_HOME
-
-    #pip download cache
-    export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
-
-    MY_PATH=$MY_PATH:$JAVA_HOME/bin
-
-    # Scala dev stuff
-    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/scala_runtime/bin
-    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/scala/sbt/bin
-
-    # heroku
-    MY_PATH=$MY_PATH:/usr/local/heroku/bin
-
-    # php composer
-    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/composer
-
-    # sml binaries
-    MY_PATH=$MY_PATH:/home/barbossa/r_n_d/smlnj/bin
+    export PAGER=less
 
     # ruby gems
-    MY_PATH=$MY_PATH:/home/barbossa/.gem/ruby/2.1.0/bin
+    MY_PATH=$MY_PATH:/home/barbossa/.gem/ruby/2.2.0/bin
 
     # node modules
     MY_PATH=$MY_PATH:/home/barbossa/node_modules/.bin

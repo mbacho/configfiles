@@ -16,20 +16,12 @@ deactivate () {
     fi
 
     unset -f deactivate
-    unalias grtest
-    unalias grdemo
-    unalias grbuild
-    unalias grhint
 }
 
 JS_BIN="$(npm bin)"
 JS_ENV_NAME="payer-frontend"
 export JS_BIN
 export JS_ENV_NAME
-alias grtest='grunt test:e2e'
-alias grdemo='grunt demo'
-alias grbuild='grunt build'
-alias grhint='grunt jshint'
 
 _OLD_JS_PATH="$PATH"
 PATH="$JS_BIN:$PATH"

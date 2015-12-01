@@ -20,3 +20,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(fringe ((t (:background "#212526" :width normal)))))
+;disable backup
+(setq backup-inhibited t)
+;disable auto save
+(setq auto-save-default nil)
