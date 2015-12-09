@@ -1,0 +1,5 @@
+\timing on
+\pset null '[NULL]'
+\x auto
+\set HISTCONTROL ignoreboth
+\set IGNOREEOF 5

@@ -33,4 +33,6 @@ set laststatus=2
 set foldmethod=indent
 set foldlevel=99
 set fileformat=unix
+set splitbelow
+set splitright
 
