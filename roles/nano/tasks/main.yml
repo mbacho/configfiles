@@ -1,0 +1,6 @@
+---
+
+- name: install nano
+  pacman: name=nano state=present
+  sudo: yes
+  tags: nano

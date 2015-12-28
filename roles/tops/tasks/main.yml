@@ -1,0 +1,14 @@
+---
+
+- name: install tops
+  pacman: state=present name={{item}}
+  with_items:
+      - htop
+      - iotop
+      - ntop
+  sudo: yes
+  tags: tops
+
+- name: write htop config file
+  template: src=htoprc dest=~/.config/htop/htoprc
+  tags: tops

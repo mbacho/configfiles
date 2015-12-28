@@ -1,0 +1,8 @@
+---
+
+- name: Setup bash config files
+  template: src={{item}} dest="~/.{{item}}"
+  with_items:
+      - bashrc
+      - bash_profile
+  tags: bash

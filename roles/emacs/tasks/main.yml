@@ -1,0 +1,14 @@
+---
+
+- name: Install emacs and python mode
+  pacman: name={{item}} state=present
+  with_items:
+      - emacs
+      - emacs-python-mode
+  sudo: yes
+  tags: emacs
+
+
+- name: Setup config file
+  template: src=emacs_config dest="~/.emacs"
+  tags: emacs

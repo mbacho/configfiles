@@ -1,0 +1,14 @@
+---
+
+- name: install postgresql and tools
+  pacman: state=present name={{item}}
+  with_items:
+      - postgresql
+      - postgresql-docs
+      - postgresql-old-upgrade
+      - postgis
+  tags: postgresql
+
+- name: write psqlrc
+  template: src=psqlrc dest=~/.psqlrc
+  tags: postgresql

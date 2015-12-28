@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-create_ap wlp3s0 ppp0 "_!_!_" "hello world"

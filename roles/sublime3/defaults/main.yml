@@ -1,0 +1,6 @@
+---
+st3_build: 3083
+st3_filename: sublime_text_3_build_{{st3_build}}_x64.tar.bz2
+st3_url: "http://c758482.r82.cf2.rackcdn.com/{{st3_filename}}"
+st3_download_folder: "/tmp"
+st3_extraction_folder: "~/Desktop/sys_pkgs"

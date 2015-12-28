@@ -1,0 +1,8 @@
+xterm*selectToClipboard:   true
+xterm*foreground: green
+xterm*background: black
+xterm*faceName: Inconsolata
+xterm*faceSize: 10
+xterm*saveLines: 10240
+xterm*borderWidth: 0
+xterm*scrollTtyOutput: false

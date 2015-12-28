@@ -1,0 +1,12 @@
+---
+
+- name: install mc
+  pacman: state=present name=mc
+  sudo: yes
+  tags: mc
+
+- name: write config files
+  template: src={{item}} dest="~/.config/mc/{{item}}"
+  with_items:
+      - "ini"
+      - "panels.ini"

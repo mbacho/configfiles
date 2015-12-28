@@ -1,0 +1,25 @@
+---
+
+- name: install xorg server and utils
+  pacman: name={{item}} state=present
+  with_items:
+    - xorg-server
+    - xorg-server-utils
+    - xorg-init
+    - mesa
+    - xf86-video-intel
+    - xf86-input-synaptics
+    - xorg-xclock
+    - xterm
+    - xorg-twm
+    - xorg-xev
+    - xclip
+  sudo: yes
+  tags: X
+
+- name: write config files
+  template: src={{item}} dest="~/.{{item}}"
+  with_items:
+      - "xinitrc"
+      - "Xresources"
+  tags: X

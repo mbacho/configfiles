@@ -1,0 +1,10 @@
+---
+
+- name: install tmux
+  pacman: state=present name=tmux
+  sudo: yes
+  tags: tmux
+
+- name: write tmux conf
+  template: src=tmux.conf dest="~/.tmux.conf"
+  tags: tmux

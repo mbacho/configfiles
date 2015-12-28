@@ -1,0 +1,5 @@
+---
+
+git_folder: "~/.git"
+git_config_file: "{{git_folder}}/gitconfig"
+git_commit_template: "{{git_folder}}/commit_template"

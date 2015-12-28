@@ -1,0 +1,28 @@
+---
+- name: Intall git, tig
+  pacman: name={{item}} state=present
+  with_items:
+      - git
+      - tig
+  sudo: yes
+  tags: git
+
+- name: remove git config directory
+  file: state=absent name="{{git_folder}}"
+  tags: git
+
+- name: create git config directory
+  file: state=directory name="{{git_folder}}"
+  tags: git
+
+- name: create template files
+  template: src={{item.src}} dest={{item.dest}}
+  with_items:
+      - {src: "gitconfig", dest: "{{git_config_file}}"}
+      - {src: "commit_template", dest: "{{git_commit_template}}"}
+  tags: git
+
+- name: make symlink from ~/.gitconfig
+  file: state=link src="{{git_config_file}}" dest="~/.gitconfig"
+  tags: git
+

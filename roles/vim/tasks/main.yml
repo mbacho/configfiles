@@ -1,0 +1,18 @@
+---
+- name: Install vim and some plugins
+  pacman: name={{item}} state=present
+  with_items:
+      - vim
+      - vim-spell-en
+      - vim-spell-uk
+      - vim-spell-es
+      - vim-spell-sw
+      - vim-ctrlp
+      - vim-fugitive
+      - vim-latexsuite
+  sudo: yes
+  tags: vim
+
+- name: Create vimrc file
+  template: src="vimrc" dest="~/.vimrc"
+  tags: vim

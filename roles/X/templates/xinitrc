@@ -1,0 +1,10 @@
+# Load Xresources if it exists
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+
+# startup a terminal
+xterm &
+
+# startup a window manager
+exec i3
+## exec cinnamon-session
+## exec gnome-session

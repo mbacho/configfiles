@@ -1,0 +1,26 @@
+---
+
+- name: install i3 package group
+  pacman: name=i3 state=present
+  sudo: yes
+  tags: i3
+
+- name: write config files
+  template: src={{item}} dest="~/.i3/{{item}}"
+  with_items:
+      - "config"
+      - "fehbg"
+      - "mplayerbg"
+  tags: i3
+
+- name: make symlink for i3status
+  template: src=i3status.conf dest="~/.i3status.conf"
+  tags: i3
+
+- name: copy image files for config
+  file: src={{item}} dest="~/.i3/{{item}}"
+  with_items:
+      - "internet_defence.png"
+      - "The_Black_Pearl_by_PezZcado.png"
+      - "lockscreen.png"
+  tags: i3

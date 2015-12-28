@@ -1,0 +1,9 @@
+[user]
+	email = choeringa@gmail.com
+	name = Chomba Ng'ang'a
+	signingkey = 188CFFF5
+[core]
+	editor = vim
+	ui = true
+[commit]
+	template = {{git_commit_template}}

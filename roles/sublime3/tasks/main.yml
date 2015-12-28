@@ -1,0 +1,26 @@
+---
+
+- name: download ST3
+  geturl: url={{st3_url}} dest={{st3_download_folder}}
+  tags: st3
+
+- name: extract ST3
+  unarchive: src="{{st3_download_folder}}/{{st3_filename}}" dest={{st3_extraction_folder}} copy=no
+  tags: st3
+
+- name: make symlink to ST3 binary
+  file: state=link src={{st3_extraction_folder}}/sublime_text dest=~/sys/sublime_text
+  tags: st3
+
+- name: setup config files
+  template: src={{item}} dest=~/.config/sublime-text-3/Packages/User{{item}}
+  with_items:
+      - "Default (Linux).sublime-keymap"
+      - "Distraction Free.sublime-settings"
+      - "Git.sublime-settings"
+      - "Package Control.sublime-settings"
+      - "Preferences.sublime-settings"
+      - "set_trace.nose.sublime-snippet"
+      - "set_trace.pdb.sublime-snippet"
+      - "set_trace.pytest.sublime-snippet"
+  tags: st3

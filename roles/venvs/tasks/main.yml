@@ -1,0 +1,9 @@
+---
+
+- name: confirm venv dir is present
+  file: state=directory path="{{venvs_dir}}"
+  tags: venvs
+
+- name: add js_env source file
+  template: src=js_env dest="{{venvs_dir}}/js_env"
+  tags: venvs

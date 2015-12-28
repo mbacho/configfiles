@@ -1,6 +1,0 @@
-! xterm*font:   *VT100.font2
-! xterm.font:   *VT100.font2
-! xterm*renderFont:    true
-! xterm.renderFont:    true
-! xterm*selectToClipboard:   true
-! xterm.selectToClipboard:   true
