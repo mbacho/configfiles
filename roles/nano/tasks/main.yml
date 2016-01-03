@@ -4,3 +4,7 @@
   pacman: name=nano state=present
   sudo: yes
   tags: nano
+
+- name: Write config file
+  template: src=nanorc dest="~/.nanorc"
+  tags: nano

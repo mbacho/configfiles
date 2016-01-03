@@ -1,0 +1,12 @@
+---
+- name: Install ranger
+  pacman: state=present name=ranger
+  sudo: true
+  tags: ranger
+
+
+- name: Copy ranger config files
+  template: src={{item}} dest="~/.config/ranger/{{item}}"
+  with_items:
+      - rc.conf
+  tags: ranger

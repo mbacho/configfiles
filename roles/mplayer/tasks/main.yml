@@ -1,0 +1,13 @@
+---
+
+- name: install mplayer
+  pacman: name=mplayer state=present
+  sudo: yes
+  tags: mplayer
+
+- name: copy config files
+  template: src="{{item}}" dest="~/.mplayer/{{item}}"
+  with_items:
+      - config
+      - input.conf
+  tags: mplayer
